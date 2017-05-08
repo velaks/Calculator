@@ -3,9 +3,9 @@ import java.awt.*;
 
 
 public class Calculator extends JPanel{
-	private JButton b7, b8, b9, b4, b5, b6, b1, b2, b3, b0, bdel, bmult, bpl, bmin, beq;
+	JButton b7, b8, b9, b4, b5, b6, b1, b2, b3, 
+	b0, bdiv, bmult, bpl, bmin, cancel, equal, bpoint;
 	private JTextField f;
-	private JLabel label = new JLabel();
 	
 	GridBagConstraints gbc = new GridBagConstraints();
 	
@@ -13,16 +13,16 @@ public class Calculator extends JPanel{
 		setLayout(new GridBagLayout());
 		
 		f = new JTextField(10);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 8;
-		gbc.gridheight = 1;
-		gbc.weightx = 0.0;
+		gbc.gridx = 0; //coordinates
+		gbc.gridy = 0; 
+		gbc.gridwidth = 8; //blocks
+		gbc.gridheight = 1; 
+		gbc.weightx = 0.0; //resizable
 		gbc.weighty = 0.0;
-		gbc.anchor = GridBagConstraints.NORTH;
+		gbc.anchor = GridBagConstraints.NORTH; //disposition
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(5, 5, 5, 5); //top left bottom right
-		gbc.ipadx = 0; 
+		gbc.ipadx = 0; //size
 		gbc.ipady = 10;
 		add(f, gbc);
 		
@@ -74,17 +74,22 @@ public class Calculator extends JPanel{
 				0, 0));
 		
 		b0 = new JButton("0");
-		add(b0, new GridBagConstraints(0, 4, 2, 1, 0, 0, GridBagConstraints.CENTER,
+		add(b0, new GridBagConstraints(1, 4, 1, 1, 0, 0, GridBagConstraints.CENTER,
 				GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 5), 
 				0, 0));
 		
-		beq = new JButton("=");
-		add(beq, new GridBagConstraints(2, 4, 1, 1, 0, 0, GridBagConstraints.CENTER,
+		bpoint = new JButton(".");
+		add(bpoint, new GridBagConstraints(0, 4, 1, 1, 0, 0, GridBagConstraints.CENTER,
 				GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 5), 
 				0, 0));
 		
-		bdel = new JButton("/");
-		add(bdel, new GridBagConstraints(3, 1, 1, 1, 0, 0, GridBagConstraints.CENTER,
+		cancel = new JButton("c");
+		add(cancel, new GridBagConstraints(2, 4, 1, 1, 0, 0, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 5), 
+				0, 0));
+		
+		bdiv = new JButton("/");
+		add(bdiv, new GridBagConstraints(3, 1, 1, 1, 0, 0, GridBagConstraints.CENTER,
 				GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 5), 
 				0, 0));
 		
@@ -99,8 +104,13 @@ public class Calculator extends JPanel{
 				0, 0));
 		
 		bpl = new JButton("+");
-		add(bpl, new GridBagConstraints(3, 4, 1, 1, 0, 0, GridBagConstraints.CENTER,
-				GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 5), 
+		add(bpl, new GridBagConstraints(3, 4, 1, 2, 0, 0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 
+				0, 0));
+		
+		equal = new JButton("=");
+		add(equal, new GridBagConstraints(0, 5, 3, 1, 0, 0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 
 				0, 0));
 		
 		ButtonActionListener bal = new ButtonActionListener(this);
@@ -117,8 +127,10 @@ public class Calculator extends JPanel{
 		bpl.addActionListener(bal);
 		bmin.addActionListener(bal);
 		bmult.addActionListener(bal);
-		bdel.addActionListener(bal);
-		beq.addActionListener(bal);
+		bdiv.addActionListener(bal);
+		equal.addActionListener(bal);
+		cancel.addActionListener(bal);
+		bpoint.addActionListener(bal);
 		
 	}
 	
@@ -135,6 +147,7 @@ public class Calculator extends JPanel{
 		JFrame jf = new JFrame("Calculator");
 		jf.setSize(600, 500);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.setLocationRelativeTo(null);
 		jf.setResizable(false);
 		jf.setVisible(true);
 		jf.add(c);
