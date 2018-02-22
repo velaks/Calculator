@@ -1,18 +1,26 @@
+package calculator;
+
 import javax.swing.*;
 import java.awt.*;
 
 
 public class Calculator extends JPanel{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	JButton b7, b8, b9, b4, b5, b6, b1, b2, b3, 
 	b0, bdiv, bmult, bpl, bmin, cancel, equal, bpoint;
-	private JTextField f;
+	private JTextField textField;
 	
 	GridBagConstraints gbc = new GridBagConstraints();
 	
 	public Calculator() {
 		setLayout(new GridBagLayout());
 		
-		f = new JTextField(10);
+		textField = new JTextField(10);
 		gbc.gridx = 0; //coordinates
 		gbc.gridy = 0; 
 		gbc.gridwidth = 8; //blocks
@@ -21,12 +29,12 @@ public class Calculator extends JPanel{
 		gbc.weighty = 0.0;
 		gbc.anchor = GridBagConstraints.NORTH; //disposition
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.insets = new Insets(5, 5, 5, 5); //top left bottom right
+		gbc.insets = new Insets(5, 5, 5, 5); //insets; top-left-bottom-right
 		gbc.ipadx = 0; //size
 		gbc.ipady = 10;
-		add(f, gbc);
+		add(textField, gbc);
 		
-		//simpler
+		//more simple
 		b7 = new JButton("7");
 		add(b7, new GridBagConstraints(0, 1, 1, 1, 0, 0, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 
@@ -135,24 +143,27 @@ public class Calculator extends JPanel{
 	}
 	
 	public void setDisplayValue(String val) {
-		f.setText(val);
+		textField.setText(val);
 	}
 	
 	public String getDisplayValue(){
-		return f.getText();
+		return textField.getText();
 	}
 	
 	public static void main(String args[]) {
-		Calculator c = new Calculator();
-		JFrame jf = new JFrame("Calculator");
-		jf.setSize(600, 500);
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setLocationRelativeTo(null);
-		jf.setResizable(false);
-		jf.setVisible(true);
-		jf.add(c);
-		jf.pack();
-		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				Calculator c = new Calculator();
+				JFrame jf = new JFrame("Calculator");
+				jf.setSize(600, 500);
+				jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				jf.setLocationRelativeTo(null);
+				jf.setResizable(false);
+				jf.setVisible(true);
+				jf.add(c);
+				jf.pack();
+			}
+		});
 		
 	}
 }
